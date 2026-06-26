@@ -63,7 +63,15 @@ module IR {
    */
   class Instruction extends ControlFlow::Node {
     Instruction() {
-      this.isIn(_)
+      this.isIn(_) and
+      // A composite-literal `KeyValueExpr` (e.g. `x: y` in `T{x: y}`) is a
+      // syntactic wrapper, not a value-producing expression. The shared CFG
+      // library nevertheless gives it an in-order node, because it is an
+      // `Expr` with a child. We exclude that node here so it does not surface
+      // as an instruction (and hence as a data-flow `ExprNode`); the value of
+      // the element is its `getValue()` child, which is handled directly by
+      // the corresponding `lit-init` instruction.
+      not this.isIn(any(KeyValueExpr kve))
       or
       this.isAdditional(_, _)
       or
