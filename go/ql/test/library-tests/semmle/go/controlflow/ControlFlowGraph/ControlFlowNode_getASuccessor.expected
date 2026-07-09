@@ -77,14 +77,12 @@
 | DuplicateSwitchCase.go:14:1:14:15 | Normal Exit | DuplicateSwitchCase.go:14:1:14:15 | Exit |
 | DuplicateSwitchCase.go:14:1:14:15 | function declaration | DuplicateSwitchCase.go:14:1:14:15 | After function declaration |
 | DuplicateSwitchCase.go:14:14:14:15 | block statement | DuplicateSwitchCase.go:14:1:14:15 | Normal Exit |
-| DuplicateSwitchCase.go:14:14:14:15 | block statement | DuplicateSwitchCase.go:14:14:14:15 | block statement |
 | DuplicateSwitchCase.go:16:1:16:14 | After function declaration | DuplicateSwitchCase.go:0:0:0:0 | After DuplicateSwitchCase.go |
 | DuplicateSwitchCase.go:16:1:16:14 | Before function declaration | DuplicateSwitchCase.go:16:1:16:14 | function declaration |
 | DuplicateSwitchCase.go:16:1:16:14 | Entry | DuplicateSwitchCase.go:16:13:16:14 | block statement |
 | DuplicateSwitchCase.go:16:1:16:14 | Normal Exit | DuplicateSwitchCase.go:16:1:16:14 | Exit |
 | DuplicateSwitchCase.go:16:1:16:14 | function declaration | DuplicateSwitchCase.go:16:1:16:14 | After function declaration |
 | DuplicateSwitchCase.go:16:13:16:14 | block statement | DuplicateSwitchCase.go:16:1:16:14 | Normal Exit |
-| DuplicateSwitchCase.go:16:13:16:14 | block statement | DuplicateSwitchCase.go:16:13:16:14 | block statement |
 | epilogues.go:0:0:0:0 | After epilogues.go | epilogues.go:0:0:0:0 | Normal Exit |
 | epilogues.go:0:0:0:0 | Entry | epilogues.go:0:0:0:0 | epilogues.go |
 | epilogues.go:0:0:0:0 | Normal Exit | epilogues.go:0:0:0:0 | Exit |
@@ -419,10 +417,10 @@
 | epilogues.go:69:2:69:25 | After defer statement | epilogues.go:70:2:70:20 | expression statement |
 | epilogues.go:69:2:69:25 | Before defer statement | epilogues.go:69:8:69:25 | call to log |
 | epilogues.go:69:2:69:25 | defer statement | epilogues.go:69:2:69:25 | After defer statement |
+| epilogues.go:69:8:69:11 | (...) | epilogues.go:69:9:69:10 | Before &... |
 | epilogues.go:69:8:69:11 | After (...) | epilogues.go:69:8:69:15 | selection of log |
-| epilogues.go:69:8:69:11 | Before (...) | epilogues.go:69:9:69:10 | Before &... |
 | epilogues.go:69:8:69:15 | After selection of log | epilogues.go:69:17:69:21 | Before "ptr" |
-| epilogues.go:69:8:69:15 | Before selection of log | epilogues.go:69:8:69:11 | Before (...) |
+| epilogues.go:69:8:69:15 | Before selection of log | epilogues.go:69:8:69:11 | (...) |
 | epilogues.go:69:8:69:15 | selection of log | epilogues.go:69:8:69:15 | After selection of log |
 | epilogues.go:69:8:69:25 | After call to log | epilogues.go:69:2:69:25 | defer statement |
 | epilogues.go:69:8:69:25 | call to log | epilogues.go:69:8:69:15 | Before selection of log |
@@ -598,6 +596,7 @@
 | epilogues.go:94:3:94:7 | panic | epilogues.go:94:3:94:7 | After panic |
 | epilogues.go:94:3:94:14 | Before call to panic | epilogues.go:94:3:94:7 | Before panic |
 | epilogues.go:94:3:94:14 | call to panic | epilogues.go:87:1:98:1 | Exceptional Exit |
+| epilogues.go:94:3:94:14 | call to panic | epilogues.go:88:8:92:4 | defer-invoke function call |
 | epilogues.go:94:3:94:14 | expression statement | epilogues.go:94:3:94:14 | Before call to panic |
 | epilogues.go:94:9:94:13 | "neg" | epilogues.go:94:9:94:13 | After "neg" |
 | epilogues.go:94:9:94:13 | After "neg" | epilogues.go:94:3:94:14 | call to panic |
@@ -677,6 +676,7 @@
 | epilogues.go:115:1:118:1 | Before function declaration | epilogues.go:115:1:118:1 | function declaration |
 | epilogues.go:115:1:118:1 | Entry | epilogues.go:115:26:118:1 | block statement |
 | epilogues.go:115:1:118:1 | Exceptional Exit | epilogues.go:115:1:118:1 | Exit |
+| epilogues.go:115:1:118:1 | Normal Exit | epilogues.go:115:1:118:1 | Exit |
 | epilogues.go:115:1:118:1 | function declaration | epilogues.go:115:1:118:1 | After function declaration |
 | epilogues.go:115:26:118:1 | block statement | epilogues.go:116:2:116:19 | Before defer statement |
 | epilogues.go:116:2:116:19 | After defer statement | epilogues.go:117:2:117:14 | expression statement |
@@ -687,11 +687,13 @@
 | epilogues.go:116:8:116:17 | epiRecover | epilogues.go:116:8:116:17 | After epiRecover |
 | epilogues.go:116:8:116:19 | After call to epiRecover | epilogues.go:116:2:116:19 | defer statement |
 | epilogues.go:116:8:116:19 | call to epiRecover | epilogues.go:116:8:116:17 | Before epiRecover |
+| epilogues.go:116:8:116:19 | defer-invoke call to epiRecover | epilogues.go:115:1:118:1 | Normal Exit |
 | epilogues.go:117:2:117:6 | After panic | epilogues.go:117:8:117:13 | Before "boom" |
 | epilogues.go:117:2:117:6 | Before panic | epilogues.go:117:2:117:6 | panic |
 | epilogues.go:117:2:117:6 | panic | epilogues.go:117:2:117:6 | After panic |
 | epilogues.go:117:2:117:14 | Before call to panic | epilogues.go:117:2:117:6 | Before panic |
 | epilogues.go:117:2:117:14 | call to panic | epilogues.go:115:1:118:1 | Exceptional Exit |
+| epilogues.go:117:2:117:14 | call to panic | epilogues.go:116:8:116:19 | defer-invoke call to epiRecover |
 | epilogues.go:117:2:117:14 | expression statement | epilogues.go:117:2:117:14 | Before call to panic |
 | epilogues.go:117:8:117:13 | "boom" | epilogues.go:117:8:117:13 | After "boom" |
 | epilogues.go:117:8:117:13 | After "boom" | epilogues.go:117:2:117:14 | call to panic |
@@ -843,13 +845,13 @@
 | exprs.go:6:13:6:13 | After 0 | exprs.go:6:16:6:26 | Before ...+... |
 | exprs.go:6:13:6:13 | Before 0 | exprs.go:6:13:6:13 | 0 |
 | exprs.go:6:16:6:16 | 1 | exprs.go:6:16:6:16 | After 1 |
-| exprs.go:6:16:6:16 | After 1 | exprs.go:6:20:6:26 | Before (...) |
+| exprs.go:6:16:6:16 | After 1 | exprs.go:6:20:6:26 | (...) |
 | exprs.go:6:16:6:16 | Before 1 | exprs.go:6:16:6:16 | 1 |
 | exprs.go:6:16:6:26 | ...+... | exprs.go:6:16:6:26 | After ...+... |
 | exprs.go:6:16:6:26 | After ...+... | exprs.go:6:6:6:26 | assign:0 value declaration specifier |
 | exprs.go:6:16:6:26 | Before ...+... | exprs.go:6:16:6:16 | Before 1 |
+| exprs.go:6:20:6:26 | (...) | exprs.go:6:21:6:25 | Before ...+... |
 | exprs.go:6:20:6:26 | After (...) | exprs.go:6:16:6:26 | ...+... |
-| exprs.go:6:20:6:26 | Before (...) | exprs.go:6:21:6:25 | Before ...+... |
 | exprs.go:6:21:6:21 | 2 | exprs.go:6:21:6:21 | After 2 |
 | exprs.go:6:21:6:21 | After 2 | exprs.go:6:25:6:25 | Before 3 |
 | exprs.go:6:21:6:21 | Before 2 | exprs.go:6:21:6:21 | 2 |
@@ -1522,10 +1524,12 @@
 | exprs.go:75:10:75:19 | Before call to add | exprs.go:75:10:75:12 | Before add |
 | exprs.go:75:10:75:19 | call to add | exprs.go:0:0:0:0 | Exceptional Exit |
 | exprs.go:75:10:75:19 | call to add | exprs.go:75:10:75:19 | After call to add |
+| exprs.go:75:10:75:19 | extract:0 call to add | exprs.go:75:10:75:19 | extract:1 call to add |
+| exprs.go:75:10:75:19 | extract:1 call to add | exprs.go:75:10:75:19 | call to add |
 | exprs.go:75:14:75:16 | After gen | exprs.go:75:14:75:18 | call to gen |
 | exprs.go:75:14:75:16 | Before gen | exprs.go:75:14:75:16 | gen |
 | exprs.go:75:14:75:16 | gen | exprs.go:75:14:75:16 | After gen |
-| exprs.go:75:14:75:18 | After call to gen | exprs.go:75:10:75:19 | call to add |
+| exprs.go:75:14:75:18 | After call to gen | exprs.go:75:10:75:19 | extract:0 call to add |
 | exprs.go:75:14:75:18 | Before call to gen | exprs.go:75:14:75:16 | Before gen |
 | exprs.go:75:14:75:18 | call to gen | exprs.go:0:0:0:0 | Exceptional Exit |
 | exprs.go:75:14:75:18 | call to gen | exprs.go:75:14:75:18 | After call to gen |
@@ -1543,14 +1547,14 @@
 | exprs.go:77:31:79:1 | param-init:2 block statement | exprs.go:78:2:78:22 | Before return statement |
 | exprs.go:78:2:78:22 | Before return statement | exprs.go:78:9:78:22 | ...\|\|... |
 | exprs.go:78:2:78:22 | return statement | exprs.go:77:1:79:1 | Normal Exit |
-| exprs.go:78:9:78:17 | !... | exprs.go:78:10:78:17 | Before (...) |
+| exprs.go:78:9:78:17 | !... | exprs.go:78:10:78:17 | (...) |
 | exprs.go:78:9:78:17 | After !... [false] | exprs.go:78:22:78:22 | Before z |
 | exprs.go:78:9:78:17 | After !... [true] | exprs.go:78:9:78:22 | After ...\|\|... |
 | exprs.go:78:9:78:22 | ...\|\|... | exprs.go:78:9:78:17 | !... |
 | exprs.go:78:9:78:22 | After ...\|\|... | exprs.go:78:2:78:22 | return statement |
+| exprs.go:78:10:78:17 | (...) | exprs.go:78:11:78:16 | ...&&... |
 | exprs.go:78:10:78:17 | After (...) [false] | exprs.go:78:9:78:17 | After !... [true] |
 | exprs.go:78:10:78:17 | After (...) [true] | exprs.go:78:9:78:17 | After !... [false] |
-| exprs.go:78:10:78:17 | Before (...) | exprs.go:78:11:78:16 | ...&&... |
 | exprs.go:78:11:78:11 | After x [false] | exprs.go:78:11:78:16 | After ...&&... [false] |
 | exprs.go:78:11:78:11 | After x [true] | exprs.go:78:16:78:16 | Before y |
 | exprs.go:78:11:78:11 | Before x | exprs.go:78:11:78:11 | x |
@@ -1573,7 +1577,6 @@
 | exprs.go:81:1:87:1 | Exceptional Exit | exprs.go:81:1:87:1 | Exit |
 | exprs.go:81:1:87:1 | Normal Exit | exprs.go:81:1:87:1 | Exit |
 | exprs.go:81:1:87:1 | function declaration | exprs.go:81:1:87:1 | After function declaration |
-| exprs.go:81:35:87:1 | After block statement | exprs.go:81:1:87:1 | Normal Exit |
 | exprs.go:81:35:87:1 | arg:0 block statement | exprs.go:81:35:87:1 | param-init:0 block statement |
 | exprs.go:81:35:87:1 | block statement | exprs.go:81:35:87:1 | arg:0 block statement |
 | exprs.go:81:35:87:1 | param-init:0 block statement | exprs.go:82:2:82:16 | ... := ... |
@@ -1599,7 +1602,6 @@
 | exprs.go:83:8:85:2 | block statement | exprs.go:84:3:84:12 | Before return statement |
 | exprs.go:84:3:84:12 | Before return statement | exprs.go:84:10:84:12 | Before val |
 | exprs.go:84:3:84:12 | return statement | exprs.go:81:1:87:1 | Normal Exit |
-| exprs.go:84:3:84:12 | return statement | exprs.go:81:35:87:1 | After block statement |
 | exprs.go:84:10:84:12 | After val | exprs.go:84:3:84:12 | return statement |
 | exprs.go:84:10:84:12 | Before val | exprs.go:84:10:84:12 | val |
 | exprs.go:84:10:84:12 | val | exprs.go:84:10:84:12 | After val |
@@ -1658,10 +1660,10 @@
 | exprs.go:93:32:95:1 | param-init:2 block statement | exprs.go:94:2:94:21 | Before return statement |
 | exprs.go:94:2:94:21 | Before return statement | exprs.go:94:9:94:21 | ...\|\|... |
 | exprs.go:94:2:94:21 | return statement | exprs.go:93:1:95:1 | Normal Exit |
+| exprs.go:94:9:94:16 | (...) | exprs.go:94:10:94:15 | ...&&... |
 | exprs.go:94:9:94:16 | After (...) [false] | exprs.go:94:21:94:21 | Before z |
 | exprs.go:94:9:94:16 | After (...) [true] | exprs.go:94:9:94:21 | After ...\|\|... |
-| exprs.go:94:9:94:16 | Before (...) | exprs.go:94:10:94:15 | ...&&... |
-| exprs.go:94:9:94:21 | ...\|\|... | exprs.go:94:9:94:16 | Before (...) |
+| exprs.go:94:9:94:21 | ...\|\|... | exprs.go:94:9:94:16 | (...) |
 | exprs.go:94:9:94:21 | After ...\|\|... | exprs.go:94:2:94:21 | return statement |
 | exprs.go:94:10:94:10 | After x [false] | exprs.go:94:10:94:15 | After ...&&... [false] |
 | exprs.go:94:10:94:10 | After x [true] | exprs.go:94:15:94:15 | Before y |
@@ -2595,7 +2597,6 @@
 | noretfunctions.go:18:1:18:17 | Normal Exit | noretfunctions.go:18:1:18:17 | Exit |
 | noretfunctions.go:18:1:18:17 | function declaration | noretfunctions.go:18:1:18:17 | After function declaration |
 | noretfunctions.go:18:16:18:17 | block statement | noretfunctions.go:18:1:18:17 | Normal Exit |
-| noretfunctions.go:18:16:18:17 | block statement | noretfunctions.go:18:16:18:17 | block statement |
 | noretfunctions.go:20:1:22:1 | After function declaration | noretfunctions.go:24:1:26:1 | Before function declaration |
 | noretfunctions.go:20:1:22:1 | Before function declaration | noretfunctions.go:20:1:22:1 | function declaration |
 | noretfunctions.go:20:1:22:1 | Entry | noretfunctions.go:20:26:22:1 | block statement |
@@ -2932,7 +2933,6 @@
 | stmts3.go:19:15:19:23 | Normal Exit | stmts3.go:19:15:19:23 | Exit |
 | stmts3.go:19:15:19:23 | function literal | stmts3.go:19:15:19:23 | After function literal |
 | stmts3.go:19:22:19:23 | block statement | stmts3.go:19:15:19:23 | Normal Exit |
-| stmts3.go:19:22:19:23 | block statement | stmts3.go:19:22:19:23 | block statement |
 | stmts4.go:0:0:0:0 | After stmts4.go | stmts4.go:0:0:0:0 | Normal Exit |
 | stmts4.go:0:0:0:0 | Entry | stmts4.go:0:0:0:0 | stmts4.go |
 | stmts4.go:0:0:0:0 | Normal Exit | stmts4.go:0:0:0:0 | Exit |
@@ -2982,7 +2982,6 @@
 | stmts5.go:11:1:12:1 | Normal Exit | stmts5.go:11:1:12:1 | Exit |
 | stmts5.go:11:1:12:1 | function declaration | stmts5.go:11:1:12:1 | After function declaration |
 | stmts5.go:11:20:12:1 | block statement | stmts5.go:11:1:12:1 | Normal Exit |
-| stmts5.go:11:20:12:1 | block statement | stmts5.go:11:20:12:1 | block statement |
 | stmts6.go:0:0:0:0 | After stmts6.go | stmts6.go:0:0:0:0 | Normal Exit |
 | stmts6.go:0:0:0:0 | Entry | stmts6.go:0:0:0:0 | stmts6.go |
 | stmts6.go:0:0:0:0 | Normal Exit | stmts6.go:0:0:0:0 | Exit |
@@ -3046,6 +3045,7 @@
 | stmts7.go:10:1:13:1 | Before function declaration | stmts7.go:10:1:13:1 | function declaration |
 | stmts7.go:10:1:13:1 | Entry | stmts7.go:10:19:13:1 | block statement |
 | stmts7.go:10:1:13:1 | Exceptional Exit | stmts7.go:10:1:13:1 | Exit |
+| stmts7.go:10:1:13:1 | Normal Exit | stmts7.go:10:1:13:1 | Exit |
 | stmts7.go:10:1:13:1 | function declaration | stmts7.go:10:1:13:1 | After function declaration |
 | stmts7.go:10:19:13:1 | block statement | stmts7.go:11:2:11:21 | Before defer statement |
 | stmts7.go:11:2:11:21 | After defer statement | stmts7.go:12:2:12:10 | expression statement |
@@ -3056,11 +3056,13 @@
 | stmts7.go:11:8:11:19 | recoverPanic | stmts7.go:11:8:11:19 | After recoverPanic |
 | stmts7.go:11:8:11:21 | After call to recoverPanic | stmts7.go:11:2:11:21 | defer statement |
 | stmts7.go:11:8:11:21 | call to recoverPanic | stmts7.go:11:8:11:19 | Before recoverPanic |
+| stmts7.go:11:8:11:21 | defer-invoke call to recoverPanic | stmts7.go:10:1:13:1 | Normal Exit |
 | stmts7.go:12:2:12:6 | After panic | stmts7.go:12:8:12:9 | Before "" |
 | stmts7.go:12:2:12:6 | Before panic | stmts7.go:12:2:12:6 | panic |
 | stmts7.go:12:2:12:6 | panic | stmts7.go:12:2:12:6 | After panic |
 | stmts7.go:12:2:12:10 | Before call to panic | stmts7.go:12:2:12:6 | Before panic |
 | stmts7.go:12:2:12:10 | call to panic | stmts7.go:10:1:13:1 | Exceptional Exit |
+| stmts7.go:12:2:12:10 | call to panic | stmts7.go:11:8:11:21 | defer-invoke call to recoverPanic |
 | stmts7.go:12:2:12:10 | expression statement | stmts7.go:12:2:12:10 | Before call to panic |
 | stmts7.go:12:8:12:9 | "" | stmts7.go:12:8:12:9 | After "" |
 | stmts7.go:12:8:12:9 | After "" | stmts7.go:12:2:12:10 | call to panic |
@@ -3115,11 +3117,11 @@
 | stmts7.go:25:2:25:23 | After defer statement | stmts7.go:26:2:26:31 | expression statement |
 | stmts7.go:25:2:25:23 | Before defer statement | stmts7.go:25:8:25:23 | call to fn |
 | stmts7.go:25:2:25:23 | defer statement | stmts7.go:25:2:25:23 | After defer statement |
+| stmts7.go:25:8:25:18 | (...) | stmts7.go:25:9:25:17 | Before &... |
 | stmts7.go:25:8:25:18 | After (...) | stmts7.go:25:8:25:18 | implicit-deref (...) |
-| stmts7.go:25:8:25:18 | Before (...) | stmts7.go:25:9:25:17 | Before &... |
 | stmts7.go:25:8:25:18 | implicit-deref (...) | stmts7.go:25:8:25:21 | selection of fn |
 | stmts7.go:25:8:25:21 | After selection of fn | stmts7.go:25:8:25:23 | After call to fn |
-| stmts7.go:25:8:25:21 | Before selection of fn | stmts7.go:25:8:25:18 | Before (...) |
+| stmts7.go:25:8:25:21 | Before selection of fn | stmts7.go:25:8:25:18 | (...) |
 | stmts7.go:25:8:25:21 | selection of fn | stmts7.go:25:8:25:21 | After selection of fn |
 | stmts7.go:25:8:25:23 | After call to fn | stmts7.go:25:2:25:23 | defer statement |
 | stmts7.go:25:8:25:23 | call to fn | stmts7.go:25:8:25:21 | Before selection of fn |
@@ -3174,14 +3176,14 @@
 | stmts8.go:5:2:5:13 | ... := ... | stmts8.go:5:7:5:13 | Before ...%... |
 | stmts8.go:5:2:5:13 | After ... := ... | stmts8.go:6:2:6:17 | Before return statement |
 | stmts8.go:5:2:5:13 | assign:0 ... := ... | stmts8.go:5:2:5:13 | After ... := ... |
-| stmts8.go:5:7:5:7 | After x | stmts8.go:5:11:5:13 | Before (...) |
+| stmts8.go:5:7:5:7 | After x | stmts8.go:5:11:5:13 | (...) |
 | stmts8.go:5:7:5:7 | Before x | stmts8.go:5:7:5:7 | x |
 | stmts8.go:5:7:5:7 | x | stmts8.go:5:7:5:7 | After x |
 | stmts8.go:5:7:5:13 | ...%... | stmts8.go:5:7:5:13 | After ...%... |
 | stmts8.go:5:7:5:13 | After ...%... | stmts8.go:5:2:5:13 | assign:0 ... := ... |
 | stmts8.go:5:7:5:13 | Before ...%... | stmts8.go:5:7:5:7 | Before x |
+| stmts8.go:5:11:5:13 | (...) | stmts8.go:5:12:5:12 | Before 1 |
 | stmts8.go:5:11:5:13 | After (...) | stmts8.go:5:7:5:13 | ...%... |
-| stmts8.go:5:11:5:13 | Before (...) | stmts8.go:5:12:5:12 | Before 1 |
 | stmts8.go:5:12:5:12 | 1 | stmts8.go:5:12:5:12 | After 1 |
 | stmts8.go:5:12:5:12 | After 1 | stmts8.go:5:11:5:13 | After (...) |
 | stmts8.go:5:12:5:12 | Before 1 | stmts8.go:5:12:5:12 | 1 |
